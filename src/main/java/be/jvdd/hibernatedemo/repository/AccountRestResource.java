@@ -34,7 +34,6 @@ import java.util.List;
 @RepositoryRestResource
 public interface AccountRestResource extends PagingAndSortingRepository<Account, Long>, CrudRepository<Account, Long> {
 
-    //TODO
     @Query("SELECT DISTINCT account.customerName " +
             "FROM Account account " +
             "WHERE UPPER(account.customerName) LIKE CONCAT('%',UPPER(:filter),'%') " +

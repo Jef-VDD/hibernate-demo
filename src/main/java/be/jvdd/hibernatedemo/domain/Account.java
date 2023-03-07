@@ -40,12 +40,8 @@ public class Account {
     @GeneratedValue
     @JsonIgnore
     private Long id;
-
     private String accountName;
-
     private String supplierName;
-
     private String customerName;
-
     private Double amount;
 }
