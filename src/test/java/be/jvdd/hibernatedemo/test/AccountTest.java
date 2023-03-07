@@ -19,12 +19,12 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.
  */
-package be.ixor.hibernatedemo.test;
+package be.jvdd.hibernatedemo.test;
 
-import be.ixor.hibernatedemo.HibernateDemoApplication;
-import be.ixor.hibernatedemo.domain.Account;
-import be.ixor.hibernatedemo.repository.AccountRestResource;
-import be.ixor.hibernatedemo.service.AccountService;
+import be.jvdd.hibernatedemo.HibernateDemoApplication;
+import be.jvdd.hibernatedemo.domain.Account;
+import be.jvdd.hibernatedemo.repository.AccountRestResource;
+import be.jvdd.hibernatedemo.service.AccountService;
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;

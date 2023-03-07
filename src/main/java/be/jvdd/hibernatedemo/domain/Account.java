@@ -19,22 +19,33 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.
  */
-package be.ixor.hibernatedemo.service;
+package be.jvdd.hibernatedemo.domain;
 
-import be.ixor.hibernatedemo.domain.Account;
-import be.ixor.hibernatedemo.repository.AccountRestResource;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
-import jakarta.transaction.Transactional;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Named
-public class AccountService {
+@Entity
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Account {
+    @Id
+    @GeneratedValue
+    @JsonIgnore
+    private Long id;
 
-    @Inject
-    private AccountRestResource accountRestResource;
+    private String accountName;
 
-    @Transactional
-    public Account createAccount(Account account) {
-        return accountRestResource.save(account);
-    }
+    private String supplierName;
+
+    private String customerName;
+
+    private Double amount;
 }

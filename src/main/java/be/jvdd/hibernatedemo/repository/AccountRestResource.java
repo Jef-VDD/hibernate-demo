@@ -19,9 +19,9 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.
  */
-package be.ixor.hibernatedemo.repository;
+package be.jvdd.hibernatedemo.repository;
 
-import be.ixor.hibernatedemo.domain.Account;
+import be.jvdd.hibernatedemo.domain.Account;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
