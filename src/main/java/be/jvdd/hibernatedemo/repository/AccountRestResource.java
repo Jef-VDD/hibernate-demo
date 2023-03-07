@@ -37,7 +37,7 @@ public interface AccountRestResource extends PagingAndSortingRepository<Account,
     @Query("SELECT DISTINCT account.customerName " +
             "FROM Account account " +
             "WHERE UPPER(account.customerName) LIKE CONCAT('%',UPPER(:filter),'%') " +
-            "AND ((:accountNames) IS NULL OR account.accountName IN (:accountNames)) " +
+            "AND (:accountNames IS NULL OR account.accountName IN (:accountNames)) " +
             "ORDER BY account.customerName")
     Page<String> findDistinctCustomerNames(List<String> accountNames, String filter, Pageable page);
 }

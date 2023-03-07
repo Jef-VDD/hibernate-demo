@@ -42,7 +42,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @Slf4j
 public class AccountTest {
 
-    public static final String ACCOUNT_X = "accountX";
+    public static final String ACCOUNT_NAME_X = "accountX";
     public static final String SUPPLIER_ACCOUNT_X = "supplierAccountX";
     public static final String GLOBAL_CUSTOMER = "globalCustomer";
     public static final String CUSTOMER_X = "customerX";
@@ -51,14 +51,14 @@ public class AccountTest {
     public static final String CUSTOMER_Y = "customerY";
 
     public static final Account ACCOUNT_X_X_G = Account.builder()
-            .accountName(ACCOUNT_X)
+            .accountName(ACCOUNT_NAME_X)
             .supplierName(SUPPLIER_ACCOUNT_X)
             .customerName(GLOBAL_CUSTOMER)
             .amount(10.0)
             .build();
 
     public static final Account ACCOUNT_X_X_X = Account.builder()
-            .accountName(ACCOUNT_X)
+            .accountName(ACCOUNT_NAME_X)
             .supplierName(SUPPLIER_ACCOUNT_X)
             .customerName(CUSTOMER_X)
             .amount(20.0)
