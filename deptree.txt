@@ -1,5 +1,5 @@
 [INFO] --- maven-dependency-plugin:3.3.0:tree (default-cli) @ hibernate-demo ---
-[INFO] be.ixor:hibernate-demo:jar:0.0.1-SNAPSHOT
+[INFO] be.jvdd:hibernate-demo:jar:0.0.1-SNAPSHOT
 [INFO] +- org.springframework.boot:spring-boot-starter:jar:3.0.3:compile
 [INFO] |  +- org.springframework.boot:spring-boot:jar:3.0.3:compile
 [INFO] |  |  \- org.springframework:spring-context:jar:6.0.5:compile
