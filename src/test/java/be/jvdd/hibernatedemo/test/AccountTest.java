@@ -83,4 +83,15 @@ public class AccountTest {
     public void findAccountWithNoAccountNames() {
         accountRestResource.findDistinctCustomerNames(null, "global", PageRequest.of(0,50));
     }
+
+    //Fails on first execution of the query or runs through all 100 tests
+    @Test
+    public void findAccountWithSingleAccountName_looped() {
+        ArrayList<String> accountNames = new ArrayList<>();
+        accountNames.add("accountX");
+        for (int i = 0; i < 100; i++) {
+            log.info("test {}", i);
+            accountRestResource.findDistinctCustomerNames(accountNames, "global", PageRequest.of(0,50));
+        }
+    }
 }
