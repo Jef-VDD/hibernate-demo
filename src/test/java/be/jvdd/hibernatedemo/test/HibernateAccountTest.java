@@ -9,6 +9,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,9 +37,19 @@ public class HibernateAccountTest extends AbstractTest {
     public void findCustumerWithHibernate_noFilter() {
         ArrayList<String> accountNames = new ArrayList<>();
         accountNames.add("accountX");
-        List<String> customerNames = accountService.findDistinctCustomerNames(getCurrentSession(), accountNames, null);
-
+        accountService.findDistinctCustomerNames(getCurrentSession(), accountNames, null);
         log.info("test done");
+    }
+
+    //Can fail on any test execution
+    @Test
+    public void findAccountWithSingleAccountName_looped() {
+        ArrayList<String> accountNames = new ArrayList<>();
+        accountNames.add("accountX");
+        for (int i = 0; i < 100; i++) {
+            log.info("test {}", i);
+            accountService.findDistinctCustomerNames(getCurrentSession(), accountNames, null);
+        }
     }
 
 
