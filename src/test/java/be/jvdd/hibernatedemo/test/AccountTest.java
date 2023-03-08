@@ -6,6 +6,12 @@ import be.jvdd.hibernatedemo.repository.AccountRestResource;
 import be.jvdd.hibernatedemo.service.AccountService;
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.service.ServiceRegistry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +19,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
@@ -93,5 +102,47 @@ public class AccountTest {
             log.info("test {}", i);
             accountRestResource.findDistinctCustomerNames(accountNames, "global", PageRequest.of(0,50));
         }
+    }
+
+    @Test
+    public void findCustumerWithHibernate() {
+        ArrayList<String> accountNames = new ArrayList<>();
+        accountNames.add("accountX");
+        List<String> customerNames = accountService.findDistinctCustomerNames(getCurrentSession(), accountNames, "global");
+
+        log.info("test done");
+    }
+
+    @Test
+    public void findCustumerWithHibernate_noFilter() {
+        ArrayList<String> accountNames = new ArrayList<>();
+        accountNames.add("accountX");
+        List<String> customerNames = accountService.findDistinctCustomerNames(getCurrentSession(), accountNames, null);
+
+        log.info("test done");
+    }
+
+
+    public static Session getCurrentSession() {
+        Map<String, Object> settings = new HashMap<>();
+        settings.put("connection.driver_class", "org.postgresql.Driver");
+        settings.put("dialect", "org.hibernate.dialect.PostgreSQLDialec");
+        settings.put("hibernate.connection.url", "jdbc:h2:mem:test-db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;Mode=PostgreSQL");
+        settings.put("hibernate.connection.username", "sa");
+        settings.put("hibernate.connection.password", "");
+        settings.put("hibernate.current_session_context_class", "thread");
+//        settings.put("hibernate.show_sql", "true");
+//        settings.put("hibernate.format_sql", "true");
+
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                .applySettings(settings).build();
+
+        MetadataSources metadataSources = new MetadataSources(serviceRegistry);
+        metadataSources.addAnnotatedClass(Account.class);
+        Metadata metadata = metadataSources.buildMetadata();
+
+        SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
+        Session session = sessionFactory.getCurrentSession();
+        return session;
     }
 }
